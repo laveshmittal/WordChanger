@@ -18,6 +18,8 @@ namespace WordChanger
             var outputFilePath = Directory.GetParent(inputFilePath) + "\\tempOutput.txt";
 
 
+            //Taking Various inputs from user 
+
             Console.WriteLine("\tWelcome to Word Changer!");
             
             Console.Write("Please enter a word you wish to replace:"); 
@@ -32,6 +34,7 @@ namespace WordChanger
              int count;
 
              //Parsing input count to integer32
+             //if invalid input Exit from program
              if (!int.TryParse(inputCount, out count))
              {
                  Console.WriteLine("Error:Invalid Count. Please provide a valid number");
@@ -50,9 +53,14 @@ namespace WordChanger
 
             if (wordsReplacedCount < count)
             {
+                //Asking user to continue or abort as file contains less
+                //occurences of words that were asked to replace
+
                 Console.WriteLine($"File contains only {wordsReplacedCount} occurences out of {count} of \"{wordToReplace}\". Do you still wish to replace " +
                                   $"words? (press yes to continue or any key to abort) ");
                 var decision = Console.ReadLine();
+
+                //If input is not null and contains yes irrespective of case
                 if (decision != null &&decision.ToLower() == "yes")
                 {
                     WriteWordListToFile(outputFilePath, outputFileWordList);
